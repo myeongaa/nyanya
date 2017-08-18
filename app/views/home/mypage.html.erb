@@ -1,0 +1,28 @@
+   <ul class="mypage">
+        <li>
+           <img src="/img/id.jpeg" alt="..." class="img-circle">
+           <p><%= @user.userid %>   님</p>
+        </li>
+        <li>
+           <img src="/img/name.jpeg" alt="..." class="img-circle">
+           <p><%= @user.name %></p>
+        </li>
+        <li>
+           <img src="/img/email.jpeg" alt="..." class="img-circle">
+           <p><%= @user.email %></p>
+        </li>
+       <li>
+           <img src="/img/phone.jpeg" alt="..." class="img-circle">
+           <p><%= @user.number %></p>
+        </li>
+   </ul>
+    
+    
+    
+    <br/><br><br/><br/><br/><br><br/><br/><br/><br><br/><br/>
+    <ul class= "mylist">
+        
+    <% @user.bangs.reverse_each do |u| %>
+    <%= link_to u.title, bang_path(u.id) %><br>
+<%end%>
+        </ul>

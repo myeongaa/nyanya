@@ -1,7 +1,28 @@
 Rails.application.routes.draw do
-  get 'home/index'
 
-  devise_for :users
+  root 'home#index'
+
+  get 'home/index'
+  get 'home/mypage'
+  devise_for :users, :controllers => { registrations: 'registrations' }
+  
+  # smallsort bang 
+  resources :smallsort
+  resources :bang
+  post 'bang/bang_in/:id' => "bang#bang_in"
+  
+  
+  # bang
+  
+  #create
+  get '/bang/new' => 'bang#new'
+  get '/bang/create' => 'bang#create'
+  
+  #read
+  
+  #delete
+    get '/bang/destroy/:id' => 'bang#destroy'
+
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
@@ -56,4 +77,8 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+##create
+    post '/bang/show/:bang_id/comments/create' => 'comments#create',as: :comments
+##destroy
+    post '/' => 'comments#destroy'
 end

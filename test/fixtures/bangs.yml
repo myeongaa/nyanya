@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  smallsort_id: 1
+  title: MyString
+  content: MyText
+  person_limit: 1
+  current_person: 1
+
+two:
+  smallsort_id: 1
+  title: MyString
+  content: MyText
+  person_limit: 1
+  current_person: 1

@@ -1,4 +1,30 @@
-<h1>Home#index</h1>
-<p>Find me in app/views/home/index.html.erb</p>
-<p><%= current_user.email %></p>
-<a href="/users/sign_out">로그아웃</a>
+<div class="container_div">
+    <span><img src="/images/nya.png"/>최신순<img src="/images/nya.png"/></span>
+    <div class=" latest_div">
+        <% @bangs.each_with_index do |b,i| %>
+            <div class="col-md-4 portfolio-item">
+                <% @bang_date = b.bang_date.to_date %>
+                <% @year_sub = @bang_date.year - Time.now.year %>
+                <% @month_sub =@bang_date.month - Time.now.month %>
+                <% @day_sub = @bang_date.day - Time.now.day %>
+                <% @dday = @year_sub*365+@month_sub*31+@day_sub %>
+                <% if @dday == 0 %>
+                    <p>D - DAY</p>
+                <% else %>
+                    <p>D - <%= @dday %></p>
+                <% end %>
+                <a href="<%= bang_path(b.id) %>"> 
+                    <% if b.image_url == nil %>
+                        <img class="img-responsive" src="http://placehold.it/700x400" alt="<%= b.title %>">
+                    <% else %>
+                        <img class="img-responsive" src="<%= b.image_url %>" alt="<%= b.title %>">
+                    <% end %>
+                </a>
+                <h3>
+                    <%= link_to b.title, bang_path(b.id) %>
+                </h3>
+                <p class="latest_content"><%= b.introduce %></p>
+            </div>
+        <% end %>
+    </div>
+</div>

@@ -1,0 +1,95 @@
+
+
+<input type="hidden" id="bang_id" value="<%= @bang.id %>"/>
+<input type="hidden" id="user_count" value="<%= @bang.users.length %>"/>
+<input type="hidden" id="current_count" value="<%= @bang.person_limit %>"/>
+<input type="hidden" id="current_user_name" value="<%= current_user.userid %>"/>
+<div class="form-group">
+  <div class="form-pic">
+    <% if @bang.image_url != nil %>
+      <img src="<%= @bang.image_url %>"/>
+    <% else %>
+      <img src="http://placehold.it/700x400"/>
+    <% end %>
+  </div>
+  <p class="form-sort-p"><%= @bang.smallsort.bigsort.name %>  >  <%= link_to @bang.smallsort.name, smallsort_path(@bang.smallsort.id) %></p>
+  <div class="form-title" id="title">
+    <span class="form-title-title"><%= @bang.title %></span>
+    <span class="form-title-dday">D - <%= @dday %>일</span>
+  </div>
+  <div class="form-merong">
+    <p class="form-introduce"><%= @bang.introduce %></p>
+    <p class="form-king"><img src="/images/crown.png"/><%= @king.userid %>님</p>
+  </div>
+  
+  
+  <div class="form-content" id="content">
+    <%= @bang.content %>
+  </div>
+ 
+  <div class="form-human" id="human">
+    <span class="user_count_span"><%= @bang.users.length %>명 / <%= @bang.person_limit %>명</span>
+    <% unless @bang_users.include? (current_user.id) %>
+     <button class="bang_in_btn">참여하기</button>
+    <% else %>
+     <button class="bang_in_btn" disabled>참여하기</button>
+    <% end %>
+  </div>
+
+  <br>
+  <div class="form-submit">
+    <input type='text' name='input_comment' id="comment_content"/>
+    <input type='submit' value="댓글달기" class="comment_btn"/>
+  </div>
+  
+  <div id="comment_div">    
+    <% @comments.each do |c| %>
+      <p class="comment_p"><%= c.content %><span><%= c.user.userid%>님</span></p>
+    <% end %>
+  </div>
+  <!--<h3><a href="posts/edit/<%#= @bang.id %>">[수정]</a></h3>-->
+  <!--<h3><a href="posts/destroy/<%#= @bang.id %>"data-confirm="진짜로 삭제 하시겠습니까?">[삭제]</a></h3>-->
+</div>
+<script>
+  
+  $(".bang_in_btn").click(function(){
+    var bang_id = $("#bang_id").val();
+    var user_count = parseInt($("#user_count").val());
+    var count = user_count+1;
+    var person_limit = $("#current_count").val();
+    $.ajax({
+      method: "POST",
+      url: "/bang/bang_in/"+bang_id,
+      data: {},
+      success:function(data){
+        if(user_count<person_limit){
+          $(".user_count_span").text(count);
+        }
+      },
+      error:function(request,status,error){
+        alert("code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+      }
+    })
+    
+  });
+  
+  $(".comment_btn").click(function(){
+    var bang_id = $("#bang_id").val();
+    var current_user_name = $("#current_user_name").val();
+    var input_comment = $("#comment_content").val();
+    $.ajax({
+      method: "POST",
+      url: "/bang/show/"+bang_id+"/comments/create",
+      data: {input_comment:input_comment},
+      success:function(data){
+        $("#comment_div p:first-child").before( "<p class=\"comment_p\">"+input_comment+"<span>"+current_user_name+"님</span></p>" );
+         $('input[type=text]').val('');
+      },
+      error:function(request,status,error){
+        alert("댓글달기에 실패하였습니다.code:"+request.status+"\n"+"message:"+request.responseText+"\n"+"error:"+error);
+      }
+    })
+    
+  });
+    
+</script>

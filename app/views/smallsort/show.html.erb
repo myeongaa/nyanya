@@ -1,0 +1,74 @@
+
+
+    <!-- Page Content -->
+    <div class="container">
+
+        <!-- Page Header -->
+        <div class="row">
+            <div class="col-lg-12">
+                <p class="smallsort_name"><%= @smallsort.name %></p>               </h1>
+            </div>
+        </div>
+        
+        <!-- 소모임들 보이는 곳이에용 -->
+        <div class="container_div2">
+            <div class="latest_div">
+                <% @bangs.each_with_index do |b,i| %>
+                    <div class="col-md-4 portfolio-item">
+                            <a href="<%= bang_path(b.id) %>">
+                                <img class="img-responsive" src="http://placehold.it/700x400" alt="">
+                            </a>
+                            <h3>
+                                <%= link_to b.title, bang_path(b.id) %>
+                            </h3>
+                            <p class="latest_content"><%= b.content %></p>
+                    </div>
+                <% end %>
+            </div>
+        </div>
+        
+        
+        <hr>
+
+        <!-- Pagination -->
+        <div class="row text-center">
+            <div class="col-lg-12">
+                <ul class="pagination">
+                    <li>
+                        <a href="#">&laquo;</a>
+                    </li>
+                    <li class="active">
+                        <a href="#">1</a>
+                    </li>
+                    <li>
+                        <a href="#">2</a>
+                    </li>
+                    <li>
+                        <a href="#">3</a>
+                    </li>
+                    <li>
+                        <a href="#">4</a>
+                    </li>
+                    <li>
+                        <a href="#">5</a>
+                    </li>
+                    <li>
+                        <a href="#">&raquo;</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /.row -->
+
+        <hr>
+
+
+    </div>
+    <!-- /.container -->
+
+    <!-- jQuery -->
+    <script src="/js/jquery./js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/js/bootstrap.min./js"></script>
+
