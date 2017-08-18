@@ -1,5 +1,6 @@
 <%= form_tag(bang_index_path, method: "post", multipart: true) do %>
-    <div class="form-group">
+    <div class="new-group">
+        <label for="exampleInputEmail1">분류</label><br>
         <select id="bigsorts" name="bigsorts">
           <option value="">--</option>
           <% @bigsorts.each do |b| %>
@@ -13,35 +14,37 @@
           <% end %>
       </select>
     </div>
-    <div class="form-group">
+    <div class="new-group">
         <label for="exampleInputEmail1">제목</label>
         <input type="text" name="title" class="form-control" id="exampleInputEmail1" placeholder="제목을 입력하세요:)">
     </div>
-     <div class="form-group">
+     <div class="new-group">
         <label for="exampleInputEmail1">소개</label>
         <input type="text" name="introduce" class="form-control" id="exampleInputEmail1" placeholder="소개를 입력하세요:)">
     </div>
-    <div class="form-group">
+    <div class="new-group">
         <label for="exampleInputPassword1">내용</label>
         <textarea class="form-control" type="text" name="content" rows="15" placeholder="내용을 써주세요:)"></textarea>
     </div>
-    <div class="form-group">
-        인원
+    <div class="new-group">
+        <label>인원</label>
         <input type="number"  min="1" value="1" name="person_limit"/>
     </div>
   
-    <div class="form-group">
+    <div class="new-group">
         <label for="exampleInputFile">대표 이미지</label>
         <input type="file" id="exampleInputFile" name="file_url">
-    <div class="form-group">
-        모임 날짜
+    <div class="new-group">
+        <label>모임 날짜</label>
         <p>Date: <input type="text" id="datepicker" name="bang_date"></p>
     </div>
-    <div class="form-group">
-        모임 시간
+    <div class="new-group">
+        <label>모임 시간</label>
         <input type="text" class="timepicker" name="bang_time"/>
     </div>
-    <button type="submit" class="btn btn-default">작성하기</button>
+    <div class="merongg">
+        <button type="submit" class="btn btn-default">작성하기</button>
+    </div>
 <% end %>
     </div>
 

@@ -18,11 +18,15 @@
    </ul>
     
     
-    
-    <br/><br><br/><br/><br/><br><br/><br/><br/><br><br/><br/>
+   <p class="banging_p"><img src="/images/nya.png"/>참여중인 방<img src="/images/nya.png"/></p>
+   
     <ul class= "mylist">
-        
-    <% @user.bangs.reverse_each do |u| %>
-    <%= link_to u.title, bang_path(u.id) %><br>
-<%end%>
-        </ul>
+        <% @user.bangs.reverse_each do |u| %>
+            <li>
+                <span><%= link_to u.title, bang_path(u.id) %></span>
+                <span><%= u.bang_date %></span>
+                <span><%= u.bang_time %></span>
+                <span><%= User.find(u.king_id).userid %>님</span>
+            </li>
+        <%end%>
+    </ul>
