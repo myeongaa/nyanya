@@ -23,7 +23,7 @@ test:
 production:
  # <<: *default
  #database: db/production.sqlite3
-adapter: mysql2
+  adapter: mysql2
   host: 127.0.0.1
   database: basic_scaffold_production
   username: root
